@@ -5,9 +5,13 @@
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | uname              | string              | null: false             |
-| email              | string              | unique: true            |
+| email              | string              | unique: true,null: false|
 | encrypted_password | string              | null: false             |
 | birthday           | string              | null: false             |
+| sei                | string              | null: false             |
+| mei                | string              | null: false             |
+| sei_huri           | string              | null: false             |
+| mei_huri           | string              | null: false             |
 
 
 ### Association
@@ -26,6 +30,7 @@
 
 - belongs_to :user
 - has_one :adress
+- belongs_to :items
 
 ## adresses table
 
@@ -33,33 +38,31 @@
 |-------------|------------|-------------------|
 | buy         | references | foreign_key: true |
 | postal      | string     | null: false       |
-| prefectures | string     | null: false       |
+| prefectures_id | integer | null: false       |
 | municipality| string     | null: false       |
 | adress      | string     | null: false       |
 | phone       | string     | null: false       |
+| building    | string     | null: false       |
 
 ### Association
 
 - belongs_to :buy
-- belongs_to :item
 
 ## items table
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
-| image       | string     | null: false       |
 | iname       | string     | null: false       |
-| description | string     | null: false       |
-| category    | string     | null: false       |
-| status      | string     | null: false       |
-| delivery    | string     | null: false       |
-| tiiki       | string     | null: false       |
-| day         | string     | null: false       |
-| price       | string     | null: false       |
-| seller      | string     | null: false       |
+| description | text       | null: false       |
+| category_id | integer    | null: false       |
+| status_id   | integer    | null: false       |
+| delivery_id | integer    | null: false       |
+| tiiki_id    | integer    | null: false       |
+| day_id      | integer    | null: false       |
+| price       | integer    | null: false       |
 | user        | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :adress
+- has_one :buy
