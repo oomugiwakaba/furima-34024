@@ -5,8 +5,9 @@
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | uname              | string              | null: false             |
-| email              | string              | null: false             |
-| password           | string              | null: false             |
+| email              | string              | unique: true            |
+| encrypted_password | string              | null: false             |
+| birthday           | string              | null: false             |
 
 
 ### Association
@@ -16,11 +17,10 @@
 
 ## buys table
 
-| Column                              | Type       | Options           |
-|-------------------------------------|------------|-------------------|
-| buyer                               | string     | null: false       |
-| item_id                             | references | foreign_key: true |
-| user_id                             | references | foreign_key: true |
+| Column                           | Type       | Options           |
+|----------------------------------|------------|-------------------|
+| item                             | references | foreign_key: true |
+| user                             | references | foreign_key: true |
 
 ### Association
 
@@ -31,10 +31,12 @@
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
-| buy_id      | references | foreign_key: true |
-| item_id     | references | foreign_key: true |
-| user_id     | references | foreign_key: true |
+| buy         | references | foreign_key: true |
+| postal      | string     | null: false       |
+| prefectures | string     | null: false       |
+| municipality| string     | null: false       |
 | adress      | string     | null: false       |
+| phone       | string     | null: false       |
 
 ### Association
 
@@ -45,11 +47,17 @@
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
+| image       | string     | null: false       |
 | iname       | string     | null: false       |
+| description | string     | null: false       |
 | category    | string     | null: false       |
+| status      | string     | null: false       |
+| delivery    | string     | null: false       |
+| tiiki       | string     | null: false       |
+| day         | string     | null: false       |
 | price       | string     | null: false       |
 | seller      | string     | null: false       |
-| user_id     | references | foreign_key: true |
+| user        | references | foreign_key: true |
 
 ### Association
 
