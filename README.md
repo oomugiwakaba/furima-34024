@@ -7,7 +7,7 @@
 | uname              | string              | null: false             |
 | email              | string              | unique: true,null: false|
 | encrypted_password | string              | null: false             |
-| birthday           | string              | null: false             |
+| birthday           | date                | null: false             |
 | sei                | string              | null: false             |
 | mei                | string              | null: false             |
 | sei_huri           | string              | null: false             |
@@ -30,7 +30,7 @@
 
 - belongs_to :user
 - has_one :adress
-- belongs_to :items
+- belongs_to :item
 
 ## adresses table
 
@@ -42,7 +42,7 @@
 | municipality| string     | null: false       |
 | adress      | string     | null: false       |
 | phone       | string     | null: false       |
-| building    | string     | null: false       |
+| building    | string     |                   |
 
 ### Association
 
@@ -57,7 +57,7 @@
 | category_id | integer    | null: false       |
 | status_id   | integer    | null: false       |
 | delivery_id | integer    | null: false       |
-| tiiki_id    | integer    | null: false       |
+| prefectures_id | integer    | null: false       |
 | day_id      | integer    | null: false       |
 | price       | integer    | null: false       |
 | user        | references | foreign_key: true |
