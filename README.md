@@ -1,24 +1,68 @@
-# README
+# DB 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
 
-Things you may want to cover:
+| Column             | Type                | Options                 |
+|--------------------|---------------------|-------------------------|
+| uname              | string              | null: false             |
+| email              | string              | unique: true,null: false|
+| encrypted_password | string              | null: false             |
+| birthday           | date                | null: false             |
+| sei                | string              | null: false             |
+| mei                | string              | null: false             |
+| sei_huri           | string              | null: false             |
+| mei_huri           | string              | null: false             |
 
-* Ruby version
 
-* System dependencies
+### Association
 
-* Configuration
+* has_many :buys
+* has_many :items
 
-* Database creation
+## buys table
 
-* Database initialization
+| Column                           | Type       | Options           |
+|----------------------------------|------------|-------------------|
+| item                             | references | foreign_key: true |
+| user                             | references | foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_one :adress
+- belongs_to :item
 
-* Deployment instructions
+## adresses table
 
-* ...
+| Column      | Type       | Options           |
+|-------------|------------|-------------------|
+| buy         | references | foreign_key: true |
+| postal      | string     | null: false       |
+| prefectures_id | integer | null: false       |
+| municipality| string     | null: false       |
+| adress      | string     | null: false       |
+| phone       | string     | null: false       |
+| building    | string     |                   |
+
+### Association
+
+- belongs_to :buy
+
+## items table
+
+| Column      | Type       | Options           |
+|-------------|------------|-------------------|
+| iname       | string     | null: false       |
+| description | text       | null: false       |
+| category_id | integer    | null: false       |
+| status_id   | integer    | null: false       |
+| delivery_id | integer    | null: false       |
+| prefectures_id | integer    | null: false       |
+| day_id      | integer    | null: false       |
+| price       | integer    | null: false       |
+| user        | references | foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- has_one :buy
