@@ -15,7 +15,10 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
 
-
+      it 'すべての項目が正しい時保存できる' do
+        expect(@user).to be_valid
+      end
+      
 
     end
 
@@ -53,6 +56,18 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
   
+      it 'passwordが半角数字のみでは登録できない' do
+        @user.password = 'asdfghj'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it 'passwordが全角では登録できないこと' do
+        @user.password = 'あsdfghっjk'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid. Input half-width characters.")
+      end
+
       it 'passwordが5文字以下では登録できないこと' do
         @user.password = '12345'
         @user.password_confirmation = '12345'
@@ -91,13 +106,13 @@ RSpec.describe User, type: :model do
       end
 
       it 'seiは、全角（漢字・ひらがな・カタカナ）でないと登録できないこと' do
-        @user.sei = 'fdhr'
+        @user.sei = 'oota'
         @user.valid?
         expect(@user.errors.full_messages).to include("Sei is invalid. Input full-width characters.")
       end
 
       it 'meiは、全角（漢字・ひらがな・カタカナ）でないと登録できないこと' do
-        @user.mei = 'hiydjt'
+        @user.mei = 'yosio'
         @user.valid?
         expect(@user.errors.full_messages).to include("Mei is invalid. Input full-width characters.")
       end
@@ -115,15 +130,27 @@ RSpec.describe User, type: :model do
       end
 
       it 'sei_huriは、全角（カタカナ）でないと登録できないこと' do
-        @user.sei_huri = 'ostw'
+        @user.sei_huri = 'oota'
         @user.valid?
         expect(@user.errors.full_messages).to include("Sei huri is invalid. Input full-width katakana characters.")
       end
 
       it 'mei_huriは、全角（カタカナ）でないと登録できないこと' do
-        @user.mei_huri = 'hrshh'
+        @user.mei_huri = 'yosio'
         @user.valid?
         expect(@user.errors.full_messages).to include("Mei huri is invalid. Input full-width katakana characters.")
+      end
+
+      it 'sei_huriは、カタカナ以外の全角文字だと登録できないこと' do
+        @user.sei_huri = '大田'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Sei huri is invalid. Input full-width katakana characters.")
+      end
+
+      it 'mei_huriは、カタカナ以外の全角文字だと登録できないこと' do
+        @user.sei_huri = '義夫'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Sei huri is invalid. Input full-width katakana characters.")
       end
 
       it '生年月日が必須であること' do
