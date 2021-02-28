@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   describe '#create' do
     before do
       @user = FactoryBot.build(:user)
+      # @user = FactoryBot.build(:user)
     end
 
 
@@ -59,13 +60,13 @@ RSpec.describe User, type: :model do
       it 'passwordが半角数字のみでは登録できない' do
         @user.password = 'asdfghj'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width characters.")
       end
 
       it 'passwordが全角では登録できないこと' do
         @user.password = 'あsdfghっjk'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid. Input half-width characters.")
+        expect(@user.errors.full_messages).to include( "Password is invalid. Input half-width characters.")
       end
 
       it 'passwordが5文字以下では登録できないこと' do
@@ -90,7 +91,7 @@ RSpec.describe User, type: :model do
       it 'パスワードは、半角英数字混合での入力が必須であること' do
         @user.password = 'aaaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width characters.")
       end
 
       it 'seiが空では登録できないこと' do
@@ -120,13 +121,13 @@ RSpec.describe User, type: :model do
       it 'sei_huriが空では登録できないこと' do
         @user.sei_huri = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Sei huri can't be blank", "Sei huri is invalid. Input full-width katakana characters.")
+        expect(@user.errors.full_messages).to include("Sei huri can't be blank")
       end
 
       it 'mei_huriが空では登録できないこと' do
         @user.mei_huri = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Mei huri can't be blank", "Mei huri is invalid. Input full-width katakana characters.")
+        expect(@user.errors.full_messages).to include("Mei huri can't be blank")
       end
 
       it 'sei_huriは、全角（カタカナ）でないと登録できないこと' do
