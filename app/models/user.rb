@@ -7,10 +7,17 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :uname
     validates :birthday
-    validates :sei, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/, message: "is invalid. Input full-width characters."}
-    validates :mei, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/, message: "is invalid. Input full-width characters."}
-    validates :sei_huri, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters."}
-    validates :mei_huri, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters."}
+
+    with_options format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/, message: "is invalid. Input full-width characters."} do
+      validates :sei
+      validates :mei
+    end
+
+    with_options format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters."} do
+      validates :sei_huri
+      validates :mei_huri
+    end
+
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze, message: "is invalid. Input half-width characters."}
 
   end
