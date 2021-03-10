@@ -9,20 +9,23 @@ class Item < ApplicationRecord
   belongs_to :prefectures
   belongs_to :status
 
-  validates :image, presence: true
-  validates :iname,  presence: true
-  validates :description,  presence: true
-  validates :price, presence: true
+  with_options presence: true do
+    validates :image
+    validates :iname
+    validates :description
+    validates :price
+  
+    validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
+    validates :price, numericality: {other_than: 0, message: "can't be blank"}
+  end
 
-  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
-  validates :price, presence: true, numericality: {other_than: 0, message: "can't be blank"}
 
-
-  validates :category_id, numericality: { other_than: 1 } 
-  validates :day_id, numericality: { other_than: 1 } 
-  validates :delivery_id, numericality: { other_than: 1 } 
-  validates :prefectures_id, numericality: { other_than: 1 } 
-  validates :status_id, numericality: { other_than: 1 } 
-
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :day_id
+    validates :delivery_id 
+    validates :prefectures_id
+    validates :status_id
+  end
 
 end
