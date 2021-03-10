@@ -102,7 +102,11 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
-
+      it '料金が上限を超えていたら登録できないこと' do
+        @item.price = 9999999999
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid")
+      end
 
 
 
