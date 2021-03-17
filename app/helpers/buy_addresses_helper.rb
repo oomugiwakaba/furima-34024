@@ -1,0 +1,2 @@
+module BuyAddressesHelper
+end
