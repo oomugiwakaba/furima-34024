@@ -96,7 +96,13 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include("Phone is not a number")
       end
 
-      
+      it "電話番号は全角数字では登録できないこと" do
+        @buy_address.phone = "０９０１２３４５６７８"
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone is not a number")
+      end
+
+
     end
 
 
