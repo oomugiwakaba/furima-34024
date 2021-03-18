@@ -1,12 +1,12 @@
 class BuyAddressesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
+  before_action :redirect, only: [:index, :create]
 
 
 
 
   def index
-    redirect_to root_path if current_user.id == @item.user_id || @item.buy.present? 
     @buy_address = BuyAddress.new
   end
 
@@ -41,7 +41,13 @@ class BuyAddressesController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
+
+
+  def redirect
+    redirect_to root_path if current_user.id == @item.user_id || @item.buy.present? 
+  end
+
 
 end

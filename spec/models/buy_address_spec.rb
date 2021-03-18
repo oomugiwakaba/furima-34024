@@ -34,7 +34,7 @@ RSpec.describe BuyAddress, type: :model do
       end
       
       it '都道府県のidが1では登録できないこと' do
-        @buy_address.prefectures_id = '1'
+        @buy_address.prefectures_id = 1
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Prefectures must be other than 1")
       end
@@ -90,7 +90,11 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include("User can't be blank")
       end
 
-
+      it "電話番号は英数混合では登録できないこと" do
+        @buy_address.phone = "1asdfghj4"
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone is not a number")
+      end
 
       
     end
