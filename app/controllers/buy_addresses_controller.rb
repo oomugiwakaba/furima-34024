@@ -1,22 +1,21 @@
 class BuyAddressesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
 
 
 
 
   def index
-    @buy_address = BuyAddress.new
     @item = Item.find(params[:item_id])
+    redirect_to root_path if current_user.id == @item.user_id || @item.buy.present? 
+    @buy_address = BuyAddress.new
   end
 
 
   def create
-  
     @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new(address_params)
     if @buy_address.valid?
-
       pay_item
-
       @buy_address.save!
        redirect_to root_path
     else
