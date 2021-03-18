@@ -17,7 +17,11 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address).to be_valid
       end
     
-    
+      it 'ビル名は空でも保存できる' do
+        @buy_address.building = ''
+        expect(@buy_address).to be_valid
+      end
+
     end
 
 
@@ -29,10 +33,10 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include("Postal can't be blank")
       end
       
-      it '都道府県が空では登録できないこと' do
-        @buy_address.prefectures_id = ''
+      it '都道府県のidが1では登録できないこと' do
+        @buy_address.prefectures_id = '1'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Prefectures can't be blank")
+        expect(@buy_address.errors.full_messages).to include("Prefectures must be other than 1")
       end
 
       it '市区町村が空では登録できないこと' do
@@ -71,6 +75,19 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.token = nil
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+
+      it "item_idが空では登録できないこと" do
+        @buy_address.item_id = ""
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "user_idが空では登録できないこと" do
+        @buy_address.user_id = ""
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("User can't be blank")
       end
 
 
