@@ -3,9 +3,6 @@ class BuyAddressesController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :redirect, only: [:index, :create]
 
-
-
-
   def index
     @buy_address = BuyAddress.new
   end
@@ -49,5 +46,5 @@ class BuyAddressesController < ApplicationController
     redirect_to root_path if current_user.id == @item.user_id || @item.buy.present? 
   end
 
-
 end
+
