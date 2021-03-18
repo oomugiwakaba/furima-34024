@@ -6,13 +6,14 @@ class BuyAddress
     validates :postal, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :municipality
     validates :phone, length: {only_integer: true, maximum: 11}
-    validates :phone, numericality: true
     validates :adress
     validates :item_id
     validates :user_id
     validates :token
 
   end
+
+  validates :phone, numericality: true
 
   validates :prefectures_id, numericality: { other_than: 1 }
 
