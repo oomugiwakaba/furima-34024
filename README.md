@@ -29,10 +29,10 @@
 ### Association
 
 - belongs_to :user
-- has_one :adress
+- has_one :address
 - belongs_to :item
 
-## adresses table
+## addresses table
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
