@@ -74,6 +74,8 @@ RSpec.describe BuyAddress, type: :model do
       end
 
 
+
+      
     end
 
 
