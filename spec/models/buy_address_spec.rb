@@ -30,43 +30,43 @@ RSpec.describe BuyAddress, type: :model do
       it '郵便番号が空では登録できないこと' do
         @buy_address.postal = ''
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Postal can't be blank")
+        expect(@buy_address.errors.full_messages).to include("郵便番号を入力してください")
       end
       
       it '都道府県のidが1では登録できないこと' do
         @buy_address.prefectures_id = 1
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Prefectures must be other than 1")
+        expect(@buy_address.errors.full_messages).to include("都道府県は1以外の値にしてください")
       end
 
       it '市区町村が空では登録できないこと' do
         @buy_address.municipality = ''
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Municipality can't be blank")
+        expect(@buy_address.errors.full_messages).to include("市区町村を入力してください")
       end
 
       it '番地が空では登録できないこと' do
         @buy_address.adress = ''
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Adress can't be blank")
+        expect(@buy_address.errors.full_messages).to include("番地を入力してください")
       end
 
       it '電話番号が空では登録できないこと' do
         @buy_address.phone = ''
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Phone can't be blank")
+        expect(@buy_address.errors.full_messages).to include("電話番号を入力してください")
       end
 
       it '郵便番号にハイフンがなければ登録できないこと' do
         @buy_address.postal = '1231234'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Postal is invalid. Include hyphen(-)")
+        expect(@buy_address.errors.full_messages).to include("郵便番号はハイフンを含んでください")
       end
 
       it '電話番号が11桁より大きければ登録できないこと' do
         @buy_address.phone = '123123456789123'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Phone is too long (maximum is 11 characters)")
+        expect(@buy_address.errors.full_messages).to include("電話番号は11文字以内で入力してください")
       end
 
 
@@ -74,32 +74,32 @@ RSpec.describe BuyAddress, type: :model do
       it "tokenが空では登録できないこと" do
         @buy_address.token = nil
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+        expect(@buy_address.errors.full_messages).to include("トークンを入力してください")
       end
 
 
       it "item_idが空では登録できないこと" do
         @buy_address.item_id = ""
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Item can't be blank")
+        expect(@buy_address.errors.full_messages).to include("商品を入力してください")
       end
 
       it "user_idが空では登録できないこと" do
         @buy_address.user_id = ""
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("User can't be blank")
+        expect(@buy_address.errors.full_messages).to include("ユーザーを入力してください")
       end
 
       it "電話番号は英数混合では登録できないこと" do
         @buy_address.phone = "1asdfghj4"
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Phone is not a number")
+        expect(@buy_address.errors.full_messages).to include("電話番号は数値で入力してください")
       end
 
       it "電話番号は全角数字では登録できないこと" do
         @buy_address.phone = "０９０１２３４５６７８"
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Phone is not a number")
+        expect(@buy_address.errors.full_messages).to include("電話番号は数値で入力してください")
       end
 
 
