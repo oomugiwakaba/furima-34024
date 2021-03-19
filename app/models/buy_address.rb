@@ -3,7 +3,7 @@ class BuyAddress
   attr_accessor :item_id,:user_id,:postal,:prefectures_id,:municipality,:adress,:phone,:building,:token
 
   with_options presence: true do
-    validates :postal, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :postal, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "はハイフンを含んでください"}
     validates :municipality
     validates :phone, length: {only_integer: true, maximum: 11}
     validates :adress

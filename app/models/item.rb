@@ -15,7 +15,7 @@ class Item < ApplicationRecord
     validates :iname
     validates :description
   
-    validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
+    validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "を適切に入力してください"}
   end
 
 
